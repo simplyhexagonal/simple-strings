@@ -1,3 +1,4 @@
+export { version } from '../package.json';
 import { MultiReplaceSyncPatterns } from '@simplyhexagonal/multi-replace';
 export declare const diacriticReplacePatterns: MultiReplaceSyncPatterns;
 /**

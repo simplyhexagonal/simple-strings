@@ -51,9 +51,9 @@ var SimpleStrings = (() => {
         __export2(src_exports2, {
           multiReplace: () => multiReplace,
           multiReplaceSync: () => multiReplaceSync2,
-          version: () => version
+          version: () => version2
         });
-        var version = "1.0.4";
+        var version2 = "1.0.4";
         var multiReplace = async (content, replacePatterns) => {
           const promise = replacePatterns.reduce(async (a, [matcher, replacement]) => {
             const prevReplaceResult = await a;
@@ -82,8 +82,14 @@ var SimpleStrings = (() => {
   __export(src_exports, {
     diacriticReplacePatterns: () => diacriticReplacePatterns,
     makeUrlSafe: () => makeUrlSafe,
-    removeDiacritics: () => removeDiacritics
+    removeDiacritics: () => removeDiacritics,
+    version: () => version
   });
+
+  // package.json
+  var version = "1.0.0";
+
+  // src/index.ts
   var import_multi_replace = __toModule(require_multi_replace());
   var diacriticReplacePatterns = [
     [
