@@ -1,4 +1,4 @@
-# Package
+# Simple Strings
 ![Tests](https://github.com/simplyhexagonal/simple-strings/workflows/tests/badge.svg)
 [![Try simple-strings on RunKit](https://badge.runkitcdn.com/@simplyhexagonal/simple-strings.svg)](https://npm.runkit.com/@simplyhexagonal/simple-strings)
 
@@ -99,5 +99,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 ## License
 
-Copyright (c) 2021-Present [Package Contributors](https://github.com/simplyhexagonal/simple-strings/#contributors-).<br/>
+Copyright (c) 2021-Present [Simple Strings Contributors](https://github.com/simplyhexagonal/simple-strings/#contributors-).<br/>
 Licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
