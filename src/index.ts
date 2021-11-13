@@ -1,5 +1,5 @@
 // @ts-ignore
-import { version } from '../package.json';
+export { version } from '../package.json';
 
 import { MultiReplaceSyncPatterns, multiReplaceSync } from '@simplyhexagonal/multi-replace';
 
