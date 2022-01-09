@@ -83,11 +83,12 @@ var SimpleStrings = (() => {
     diacriticReplacePatterns: () => diacriticReplacePatterns,
     makeUrlSafe: () => makeUrlSafe,
     removeDiacritics: () => removeDiacritics,
+    simpleSearchTermIndex: () => simpleSearchTermIndex,
     version: () => version
   });
 
   // package.json
-  var version = "1.0.0";
+  var version = "2.0.0";
 
   // src/index.ts
   var import_multi_replace = __toModule(require_multi_replace());
@@ -449,9 +450,27 @@ var SimpleStrings = (() => {
     output = output.toLowerCase();
     output = encodeURIComponent(output);
     output = output.replace(/%[0-9A-F]{2}/gi, "");
-    output = output.replace(/^-+([^-])/, "$1");
-    output = output.replace(/([^-])-+$/, "$1");
+    output = output.replace(/^-+/, "");
+    output = output.replace(/-+$/, "");
+    output = output.replace(/-{2,}/, "-");
     return output;
+  };
+  var simpleSearchTermIndex = (string, sort = true) => {
+    let output = removeDiacritics(string);
+    output = output.toLowerCase();
+    output = output.replace(/^\s+/, "");
+    output = output.replace(/\s+$/, "");
+    output = output.replace(",", "");
+    output = output.replace(/[^a-z0-9+\-" ]/g, ",");
+    output = output.replace(/ {2,}/g, " ");
+    output = output.replace(/\s*,\s*/g, ",");
+    output = output.replace(/,{2,}/g, ",");
+    output = output.replace(/"[^"]+?"/g, (m) => m.replace(" ", "-"));
+    output = output.replace(/\s/g, ",");
+    output = output.replace(/"[^"]+?"/g, (m) => m.replace("-", " "));
+    return output.split(",").sort((a, b) => {
+      return sort ? a.replace(/[^a-z0-9]/g, "").localeCompare(b.replace(/[^a-z0-9]/g, "")) : 1;
+    }).join(" ");
   };
   return src_exports;
 })();
