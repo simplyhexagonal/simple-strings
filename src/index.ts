@@ -473,8 +473,34 @@ export const makeUrlSafe = (string: string) => {
   // Remove all out of whack special characters in a single regex replace.
   output = output.replace(/%[0-9A-F]{2}/gi, '');
 
-  output = output.replace(/^-+([^-])/, '$1');
-  output = output.replace(/([^-])-+$/, '$1');
+  output = output.replace(/^-+/, '');
+  output = output.replace(/-+$/, '');
+  output = output.replace(/-{2,}/, '-');
 
   return output;
 };
+
+export const simpleSearchTermIndex = (string: string, sort: boolean = true) => {
+  // Make diacritic characters "normal" (i.e. "Á" to "A").
+  let output = removeDiacritics(string);
+
+  // Make lower case, this is merely a stylistic choice which may help avoid some
+  // case related edge-case problems.
+  output = output.toLowerCase();
+
+  output = output.replace(/^\s+/, '');
+  output = output.replace(/\s+$/, '');
+  output = output.replace(',', '');
+  output = output.replace(/[^a-z0-9+\-" ]/g, ',');
+  output = output.replace(/ {2,}/g, ' ');
+  output = output.replace(/\s*,\s*/g, ',');
+  output = output.replace(/,{2,}/g, ',');
+  output = output.replace(/"[^"]+?"/g, (m) => m.replace(' ', '-'));
+  output = output.replace(/\s/g, ',');
+  output = output.replace(/"[^"]+?"/g, (m) => m.replace('-', ' '));
+
+  return output.split(',').sort((a, b) => {
+    // Sorting makes the search results more predictable.
+    return (sort) ? (a.replace(/[^a-z0-9]/g, '')).localeCompare(b.replace(/[^a-z0-9]/g, '')) : 1;
+  }).join(' ');
+}

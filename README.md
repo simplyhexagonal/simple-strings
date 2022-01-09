@@ -38,6 +38,7 @@ npm install @simplyhexagonal/simple-strings
 import {
   removeDiacritics,
   makeUrlSafe,
+  simpleSearchTermIndex,
 } from '@simplyhexagonal/simple-strings';
 
 console.log(
@@ -51,6 +52,12 @@ console.log(
 );
 
 // arvizturo-tukorfurogep
+
+console.log(
+  simpleSearchTermIndex('bee ¿¡Árvíztűrő -minus +"include, this" ')
+);
+
+// arvizturo bee +"include this" -minus
 ```
 
 Browser
@@ -61,6 +68,7 @@ Browser
   const {
     removeDiacritics,
     makeUrlSafe,
+    simpleSearchTermIndex,
   } = SimpleStrings;
 
   alert(
@@ -74,6 +82,12 @@ Browser
   );
 
   // arvizturo-tukorfurogep
+
+  alert(
+    simpleSearchTermIndex('bee ¿¡Árvíztűrő -minus +"include, this" ')
+  );
+
+  // arvizturo bee +"include this" -minus
 </script>
 ```
 
